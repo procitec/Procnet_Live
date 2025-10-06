@@ -1,0 +1,31 @@
+# Example node_types.yaml
+
+# Map an exact PID to 'database' with a friendly label
+- match_pid: 1234
+  type: database
+  label: "Local Postgres"
+
+# Exact process name match
+- match_name: "redis-server.exe"
+  type: cache
+  label: "Redis"
+
+# Regex match on process name (case-insensitive)
+- match_name: "/chrome/i"
+  type: app
+  label: "Chrome Browser"
+
+# Match by a substring or regex in the command line
+- match_cmd: "--listen 0.0.0.0:5432"
+  type: database
+  label: "DB (Public Interface)"
+
+# Regex on command line (port alternatives)
+- match_cmd: "/--port\\s+(3000|5173)/i"
+  type: service
+  label: "Dev Server"
+
+# Tag Qt-based desktop apps
+- match_name: "/qt|qtwebengine/i"
+  type: qt_desktop
+  label: "Qt App"
